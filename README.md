@@ -65,8 +65,9 @@ launch
     - pythia.hepmc → HepMC file with Pythia events
 
 
+### 5.Run Delphes (Outside MG5) : https://github.com/soumyaa-physics/delphes/tree/master/cards/IDEA
 
-### 5.Run Delphes (Outside MG5) : https://github.com/soumyaa-physics/delphes
+
 In a separate directory, run Delphes on the Pythia output:
 
 ```bash
