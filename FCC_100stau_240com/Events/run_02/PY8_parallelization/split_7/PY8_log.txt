@@ -1,0 +1,7 @@
+ PYTHIA Error in Settings::readString: did not find file tunes/Monash2013-ee.cmnd
+ PYTHIA Error in Settings::readString: searched along the following paths:
+ PYTHIA Error in Settings::readString: /cvmfs/cms.cern.ch/el8_amd64_gcc10/external/pythia8/306-84a4765a9948f9c1a5e66f80618e2c6d/share/Pythia8/xmldoc/../
+ PYTHIA Abort from Pythia::checkVersion: unmatched version numbers, in code 8.316 but in XML 8.306
+ PYTHIA Abort from Pythia::checkVersion: PYTHIA8DATA is set and using XML path /cvmfs/cms.cern.ch/el8_amd64_gcc10/external/pythia8/306-84a4765a9948f9c1a5e66f80618e2c6d/share/Pythia8/xmldoc/
+ PYTHIA Abort from Pythia::checkVersion: try unsetting PYTHIA8DATA by running "export PYTHIA8DATA=''"
+ PYTHIA Abort from Pythia::init: constructor initialization failed
