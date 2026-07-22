@@ -25,11 +25,22 @@ generate e+ e- > ta1- ta1+
 ```bash
 output FCCee_mass_stau_lifetime_ctau_ecm_com
 ```
+
+You can exit the mg5 session here.
+
 Edit the configuration files:
-1. run_card.dat: set the beam energies, the number of events (N)
+1. run_card.dat: set the beam energies and the number of events (N)
 2. param_card.dat: set
-    - Stau and neutralino masses
+    - Stau and gravitino masses
     - Stau decay width and its decay product
+
+[For reference look at the example in FCCee_100_stau_20m_ctau_ecm_240]
+
+Restart the mg5 session and:
+
+```bash
+launch FCCee_mass_stau_lifetime_ctau_ecm_com
+```
 
 3. Calculate the stau decay width using:
 
@@ -41,7 +52,7 @@ python3 lifetime.py
 
 4. pythia_card.dat: Refer to example:
 ```bash
-MG5_aMC_v3_6_6/FCCee_110_stau_2m_ctau_ecm_240/Cards/pythia8_card.dat
+MG5_aMC_v3_6_6/FCCee_100_stau_2m_ctau_ecm_240/Cards/pythia8_card.dat
 ```
 
 ### 4. Launch the Run
