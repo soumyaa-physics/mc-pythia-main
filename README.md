@@ -1,54 +1,92 @@
 # MG5 SUSY Stau Pair Production Workflow
 
-This README documents the workflow for generating and analyzing **stau pair production** in the **MSSM** using **MadGraph5_aMC@NLO (MG5)**, **Pythia8**, and **Delphes**.
+This guide explains how to generate **stau pair production events** in the **MSSM** using:
 
-## Step-by-Step Workflow
+- **MadGraph5_aMC@NLO (MG5)** → matrix element generation
+- **Pythia8** → particle showering and stau decay simulation
 
-### 1. Start MG5
+The process considered is:
 
-Open a terminal and start MadGraph5:
+```text
+e+ e- → ~tau1- ~tau1+
+```
+
+---
+
+# Step-by-Step Workflow
+
+## 1. Start MadGraph5
+
+Go to the MG5 directory and start MG5:
 
 ```bash
 cd /path/to/MG5_aMC_v2_9_18
-./bin/mg5_aMC 
+./bin/mg5_aMC
 ```
 
-### 2. Import the MSSM Model and Generate the Process
-Inside the MG5 interactive shell:
+---
+
+## 2. Generate the Stau Pair Production Process
+
+Inside the MG5 prompt:
+
 ```bash
 import model MSSM_SLHA2
 generate e+ e- > ta1- ta1+
 ```
 
-### 3. Create the Output Folder, Edit and launch the run
+Create the process folder:
 
 ```bash
 output FCCee_mass_stau_lifetime_ctau_ecm_com
 ```
 
-You can exit the mg5 session here.
-
-Edit the configuration files:
-1. run_card.dat: set the beam energies and the number of events (N)
-2. param_card.dat: set
-    - Stau and gravitino masses
-    - Stau decay width and its decay product
-
-[For reference look at the example in FCCee_100_stau_20m_ctau_ecm_240]
-
-Restart the mg5 session and:
+Exit MG5:
 
 ```bash
-launch FCCee_mass_stau_lifetime_ctau_ecm_com
+exit
 ```
 
-3. Calculate the stau decay width using:
+---
+
+## 3. Configure the Run
+
+Edit the files inside:
+
+```
+FCCee_mass_stau_lifetime_ctau_ecm_com/Cards/
+```
+
+### `run_card.dat`
+
+Set:
+
+- Beam energy
+- Number of generated events
+
+Example for FCC-ee at 240 GeV:
+
+```text
+ebeam1 = 120 GeV
+ebeam2 = 120 GeV
+```
+
+### `param_card.dat`
+
+Set:
+
+- Stau mass
+- Gravitino mass
+- Stau decay width
+- Decay channel
+
+The decay width is calculated from the stau lifetime (`cτ`):
 
 ```bash
 python3 lifetime.py
 ```
 
-You just need to provide the lifetime of stau in meters and put this value in the parameter card in stau's decay
+Provide the lifetime in meters and insert the resulting width into the stau decay section.
 
 Example:
 
@@ -57,22 +95,90 @@ DECAY 1000015 9.8731e-18  # ~tau^-_1
     1.000000e+00 2 15 1000049  # ~tau^-_1 -> tau^- grv
 ```
 
-4. pythia_card.dat: Refer to example:
-```bash
+### `pythia8_card.dat`
+
+Pythia8 also needs the stau lifetime (`cτ`) to simulate the displaced decay correctly. Use the example:
+
+```
 MG5_aMC_v3_6_6/FCCee_100_stau_2m_ctau_ecm_240/Cards/pythia8_card.dat
 ```
 
-### 4. Launch the Run
-```bash
-launch
+Set the stau proper decay length in **mm**:
+
+```text
+PartonLevel:ISR = on
+PartonLevel:FSR = on
+
+SUSY:all = on
+
+1000015:tau0 = 20000   # stau cτ in mm (20 m)
+1000015:mayDecay = on
 ```
-It is best to set the PYTHIA path:
+
+The value of `tau0` must match the lifetime used when calculating the decay width in `param_card.dat`.
+
+For example:
+
+- `cτ = 20 m`
+- `tau0 = 20000 mm`
+
+---
+
+## 4. Run the Simulation
+
+Start MG5:
+
+```bash
+./bin/mg5_aMC
+```
+
+Launch the generated process:
+
+```bash
+launch FCCee_mass_stau_lifetime_ctau_ecm_com
+```
+
+Set the Pythia8 path:
+
 ```bash
 export PYTHIA8DATA=/path/to/MG5_aMC_v3_6_6/HEPTools/pythia8/share/Pythia8/xmldoc
 ```
 
-1. In the interactive prompt, enable Pythia by pressing 1
+In the MG5 menu:
+
+1. Enable Pythia8 (`1`)
 2. Press Enter to start the run
-3. After completion, you will get:
-    - unweighted_events.lhe → LHE file with N events
-    - pythia.hepmc → HepMC file with Pythia events
+
+---
+
+## 5. Output Files
+
+After completion:
+
+```
+unweighted_events.lhe
+```
+
+MadGraph generated events.
+
+```
+pythia8_events.hepmc
+```
+
+Pythia8 showered and decayed events.
+
+---
+
+## Example Setup
+
+A complete working example:
+
+```
+FCCee_100_stau_20m_ctau_ecm_240/
+```
+
+with:
+
+- Stau mass: 100 GeV
+- Lifetime: 20 m
+- Collision energy: 240 GeV
