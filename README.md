@@ -48,7 +48,14 @@ launch FCCee_mass_stau_lifetime_ctau_ecm_com
 python3 lifetime.py
 ```
 
-[comment]: <>  (Provide neutralino type, stau mass, Δm, and mixing angles to compute the decay width and add it to the param_card under decay of stau (10000015))
+You just need to provide the lifetime of stau in meters and put this value in the parameter card in stau's decay
+
+Example:
+
+```text
+DECAY 1000015 9.8731e-18  # ~tau^-_1
+    1.000000e+00 2 15 1000049  # ~tau^-_1 -> tau^- grv
+```
 
 4. pythia_card.dat: Refer to example:
 ```bash
