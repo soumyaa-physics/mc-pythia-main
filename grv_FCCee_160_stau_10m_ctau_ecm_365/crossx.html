@@ -56,6 +56,23 @@ function UrlExists(url) {
         </tr>
         </tr>
         
+        <tr>
+        <td rowspan=2>run_02</td> 
+        <td rowspan=2><center> e+ e- <br> 182.5 x 182.5  GeV </center></td>
+        
+        <td rowspan=2> <a href="./Events/run_02/run_02_tag_1_banner.txt">tag_1</a></td>
+        
+        <td rowspan=2><center><a href="./HTML/run_02/results.html"> 0.02177 <font face=symbol>&#177;</font> 4e-06 </a>  </center></td>
+        <td rowspan=2><center> 100000<center></td><td> parton madevent </td>
+        <td>  <a  id='run_02_tag_1_parton_LHE' href='./Events/run_02/unweighted_events.lhe.gz'>LHE</a></td>
+        <td> <INPUT TYPE=SUBMIT VALUE='remove run' onClick="alert('Launch ./bin/madevent in a shell, and run the following command: remove run_02 parton --tag=tag_1')"><INPUT TYPE=SUBMIT VALUE='launch detector simulation' onClick="alert('Launch ./bin/madevent in a shell, and run the following command: pythia run_02 ')"></td>
+        </tr>
+        <td> pythia8 </td>
+        <td>  <a href="./Events/run_02/tag_1_pythia8.log">LOG</a> <a  id='run_02_tag_1_pythia8_HEPMC' href='./Events/run_02/tag_1_pythia8_events.hepmc.gz'>HEPMC</a></td>
+        <td> <INPUT TYPE=SUBMIT VALUE='remove run' onClick="alert('Launch ./bin/madevent in a shell, and run the following command: remove run_02 pythia --tag=tag_1')"><INPUT TYPE=SUBMIT VALUE='launch detector simulation' onClick="alert('Launch ./bin/madevent in a shell, and run the following command: delphes run_02')"></td> 
+        </tr>
+        </tr>
+        
         </TABLE>
     <H3 align=center><A HREF="./index.html"> Main Page </A></H3>
 </BODY> 
