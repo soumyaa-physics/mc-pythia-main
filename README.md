@@ -12,6 +12,8 @@ e+ e- → ~tau1- ~tau1+
 ```
 
 ---
+Please download the GMSB UFO model:  https://feynrules.irmp.ucl.ac.be/wiki/goldstino
+
 
 # Step-by-Step Workflow
 
@@ -31,7 +33,7 @@ cd /path/to/MG5_aMC_v2_9_18
 Inside the MG5 prompt:
 
 ```bash
-import model MSSM_SLHA2
+import model ./GldGrv_UFO
 generate e+ e- > ta1- ta1+
 ```
 
@@ -174,11 +176,11 @@ Pythia8 showered and decayed events.
 A complete working example:
 
 ```
-FCCee_100_stau_20m_ctau_ecm_240/
+grv_FCCee_160_stau_10m_ctau_ecm_365/
 ```
 
 with:
 
-- Stau mass: 100 GeV
-- Lifetime: 20 m
-- Collision energy: 240 GeV
+- Stau mass: 160 GeV
+- Lifetime: 10 m
+- Collision energy: 365 GeV
